@@ -374,7 +374,9 @@ class RawIO():
 			import numpy as np
 			from os.path import isfile, join
 
-			all_files = [f for f in ([os.path.join(file_dir, fi) for fi in os.listdir(file_dir)]) if isfile(join(file_dir, f))] #f for f in listdir(file_dir) if isfile(join(file_dir, f))]
+			# Get all files with its absolute path
+			all_files = [f for f in ([os.path.join(file_dir, fi) for fi in os.listdir(file_dir)]) if isfile(join(file_dir, f))] 
+			#f for f in listdir(file_dir) if isfile(join(file_dir, f))]
 			dms_files = list(filter(lambda x:x.endswith((".dms")), all_files))
 			return dms_files
 
@@ -496,7 +498,7 @@ class RawIO():
 
 						tilefilename = os.path.join(fpath, (fstub + "_{:04d}_{:04d}.dmd".format(x, y)))
 						tile = _readtile(tilefilename,numberofpoints, fpasize)
-						# tile = da.from_delayed(tile, (self.numberofpoints, self.fpasize, self.fpasize), self.datatype)
+						# tile = da.from_delayed(tile, (numberofpoints, fpasize, fpasize),datatype)
 						# tile = xr.DataArray(tile)
 
 						alldata[:, ystart:ystop, xstart:xstop] = tile
